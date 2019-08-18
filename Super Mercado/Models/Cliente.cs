@@ -4,6 +4,7 @@ namespace Super_Mercado.Models
 {
     public class Cliente
     {
+        [Key]
         public long Id { get; set; }
 
         [Required]

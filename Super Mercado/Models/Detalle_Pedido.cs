@@ -4,6 +4,7 @@ namespace Super_Mercado.Models
 {
     public class Detalle_Pedido
     {
+        [Key]
         public long Id { get; set; }
 
         [Required]

@@ -4,6 +4,7 @@ namespace Super_Mercado.Models
 {
     public class Empleado
     {
+        [Key]
         public long Id { get; set; }
 
         [Required]
@@ -14,5 +15,8 @@ namespace Super_Mercado.Models
 
         [Required]
         public string Apellido { get; set; }
+
+        [Required]
+        public Sucursal Sucursal { get; set; }
     }
 }
