@@ -6,16 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Super_Mercado.Services;
 using Super_Mercado.Models;
 
-
 namespace Super_Mercado.Controllers
 {
-    public class ProductoController : Controller
+
+    public class Super_MercadoController : Controller
     {
         private readonly Super_mercadoService _service;
+
+        public Super_MercadoController(Super_mercadoService srv)
+        {
+            _service = srv;
+        }
+
         public IActionResult Index()
         {
             var productos = _service.GetAll();
             return View(productos);
+        }
+
+        public async Task<IActionResult> See(long id)
+        {
+            Producto result = await _service.GetById(id);
+            if (result != null)
+            {
+                return View(result);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -58,13 +74,29 @@ namespace Super_Mercado.Controllers
             if (ModelState.IsValid)
             {
                 Producto result = await _service.Update(producto);
-                if (result != null)
+                if (result !=null)
                 {
-                    return View(producto + "" + "El producto ha sido modificado");
+                    return View(producto +""+"El producto ha sido modificado");
                 }
             }
 
             return View(null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(long Id)
+        {
+            Producto result = await _service.GetById(Id);
+            if (result != null)
+            {
+               Producto productoDeleted =await _service.Delete(result);
+                if (productoDeleted != null)
+                {
+                    return RedirectToAction(nameof(Index), new { Message = "Video eliminado exitosamente" });
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

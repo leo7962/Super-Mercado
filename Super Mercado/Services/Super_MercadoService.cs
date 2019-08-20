@@ -16,7 +16,7 @@ namespace Super_Mercado.Services
             _context = ctx;
         }
 
-        Task<Producto> ISuper_MercadoService.Create(Producto producto)
+        public Task<Producto> Create(Producto producto)
         {
             return Task.Run(() =>
             {
@@ -37,7 +37,7 @@ namespace Super_Mercado.Services
             });
         }
 
-        Task<Producto> ISuper_MercadoService.Delete(Producto producto)
+        public Task<Producto> Delete(Producto producto)
         {
             return Task.Run(() =>
             {
@@ -58,16 +58,31 @@ namespace Super_Mercado.Services
             });
         }
 
-        Task<IEnumerable<Producto>> ISuper_MercadoService.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Producto> ISuper_MercadoService.GetById(long Id)
+        public Task<IEnumerable<Producto>> GetAll()
         {
             return Task.Run(() =>
             {
                 try
+                {
+                    return _context.Productos.OrderBy(v => v.Id).AsEnumerable();
+                }
+                catch (Exception exp)
+                {
+
+                    Console.WriteLine($"Erro: {exp}");
+                }
+
+                return null;
+            });
+        }
+
+        public Task<Producto> GetById(long? Id)
+        {
+            return Task.Run(() =>
+            {
+                if (Id != null)
+                {
+try
                 {
                     var producto = _context.Productos.Where(ValueTask => ValueTask.Id == Id).First();
                     if (producto != null)
@@ -81,12 +96,13 @@ namespace Super_Mercado.Services
                     Console.WriteLine($"Erro: {exp}");
 
                 }
+                }
 
                 return null;
             });
         }
 
-        Task<Producto> ISuper_MercadoService.Update(Producto producto)
+        public Task<Producto> Update(Producto producto)
         {
             return Task.Run(() =>
             {

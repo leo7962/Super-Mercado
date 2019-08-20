@@ -15,7 +15,7 @@ namespace Super_Mercado.Data
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Producto> Productos { get; set; }
-        public DbSet<sucursal> Sucursales { get; set; }
+        public DbSet<Sucursal> Sucursales { get; set; }
 
 
     }

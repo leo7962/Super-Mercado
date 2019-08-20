@@ -12,5 +12,6 @@ namespace Super_Mercado.Models
 
         [Required]
         public int stock { get; set; }
+        
     }
 }

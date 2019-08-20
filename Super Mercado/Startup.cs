@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Super_Mercado.Data;
+using Super_Mercado.Services;
 
 namespace Super_Mercado
 {
@@ -30,6 +31,7 @@ namespace Super_Mercado
 
             services.AddDbContext<Super_MercadoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Super_MercadoDevs")));
 
+            services.AddScoped<ISuper_MercadoService, Super_mercadoService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

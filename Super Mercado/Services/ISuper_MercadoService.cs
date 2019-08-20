@@ -8,7 +8,7 @@ namespace Super_Mercado.Services
     {
         Task<Producto> Create(Producto producto);
         Task<IEnumerable<Producto>> GetAll();
-        Task<Producto> GetById(long Id);
+        Task<Producto> GetById(long? Id);
         Task<Producto> Update(Producto producto);
         Task<Producto> Delete(Producto producto);
     }
